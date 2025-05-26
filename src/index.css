@@ -19,7 +19,7 @@
     --border: #e5e7eb; */
     
     /* ShadCN-compatible variables */
-    --foreground: #2e2e2e;
+    /* --foreground: #2e2e2e;
     --card: #fffbea;
     --card-foreground: #2e2e2e;
     --popover: #fffbea;
@@ -36,7 +36,7 @@
     --destructive-foreground: #ffffff;
     --input: #e5e7eb;
     --ring: #f97316;
-    --radius: 0.75rem;
+    --radius: 0.75rem; */
   }
 }
 
