@@ -49,40 +49,40 @@ const TaskModal = ({ isOpen, onClose, onSave, task }: TaskModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md bg-card">
+      <DialogContent className="sm:max-w-md bg-[#fffbea] border border-[#e5e7eb]">
         <DialogHeader className="bg-transparent">
-          <DialogTitle className="text-foreground">{task ? 'Edit Task' : 'Create New Task'}</DialogTitle>
+          <DialogTitle className="text-[#2e2e2e]">{task ? 'Edit Task' : 'Create New Task'}</DialogTitle>
         </DialogHeader>
 
         <div className="space-y-4 bg-transparent">
           <div className="bg-transparent">
-            <Label htmlFor="title" className="text-foreground">Title</Label>
+            <Label htmlFor="title" className="text-[#2e2e2e]">Title</Label>
             <Input
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Enter task title..."
-              className="mt-1"
+              className="mt-1 bg-white border-[#e5e7eb] text-[#2e2e2e]"
             />
           </div>
 
           <div className="bg-transparent">
-            <Label htmlFor="description" className="text-foreground">Description</Label>
+            <Label htmlFor="description" className="text-[#2e2e2e]">Description</Label>
             <Textarea
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Optional description..."
-              className="mt-1"
+              className="mt-1 bg-white border-[#e5e7eb] text-[#2e2e2e]"
               rows={3}
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4 bg-transparent">
             <div className="bg-transparent">
-              <Label htmlFor="priority" className="text-foreground">Priority</Label>
+              <Label htmlFor="priority" className="text-[#2e2e2e]">Priority</Label>
               <Select value={priority} onValueChange={(value: any) => setPriority(value)}>
-                <SelectTrigger className="mt-1">
+                <SelectTrigger className="mt-1 bg-white border-[#e5e7eb]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -94,34 +94,34 @@ const TaskModal = ({ isOpen, onClose, onSave, task }: TaskModalProps) => {
             </div>
 
             <div className="bg-transparent">
-              <Label htmlFor="dueDate" className="text-foreground">Due Date</Label>
+              <Label htmlFor="dueDate" className="text-[#2e2e2e]">Due Date</Label>
               <Input
                 id="dueDate"
                 type="date"
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
-                className="mt-1"
+                className="mt-1 bg-white border-[#e5e7eb] text-[#2e2e2e]"
               />
             </div>
           </div>
 
           <div className="bg-transparent">
-            <Label htmlFor="tags" className="text-foreground">Tags</Label>
+            <Label htmlFor="tags" className="text-[#2e2e2e]">Tags</Label>
             <Input
               id="tags"
               value={tags}
               onChange={(e) => setTags(e.target.value)}
               placeholder="work, study, personal (comma separated)"
-              className="mt-1"
+              className="mt-1 bg-white border-[#e5e7eb] text-[#2e2e2e]"
             />
           </div>
         </div>
 
         <DialogFooter className="bg-transparent">
-          <Button variant="outline" onClick={handleClose}>
+          <Button variant="outline" onClick={handleClose} className="border-[#e5e7eb] text-[#2e2e2e] hover:bg-[#f3f4f6]">
             Cancel
           </Button>
-          <Button onClick={handleSave} disabled={!title.trim()}>
+          <Button onClick={handleSave} disabled={!title.trim()} className="bg-[#f97316] hover:bg-[#ea580c] text-white">
             {task ? 'Update' : 'Create'} Task
           </Button>
         </DialogFooter>

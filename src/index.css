@@ -8,94 +8,71 @@
 
 @layer base {
   :root {
-/* Light Mode Variables */
-  --bg: 245 245 247;                 /* Very light gray, not pure white */
-  --text-primary: 17 24 39;          /* Deep slate (#111827) for sharp contrast */
-  --text-secondary: 100 116 139;     /* Muted slate (#64748B) */
-  --accent: 59 130 246;              /* Blue-500 (#3B82F6) */
-  --accent-hover: 37 99 235;         /* Blue-600 (#2563EB) */
-  --success: 34 197 94;              /* Green-500 (#22C55E) */
-  --error: 239 68 68;                /* Red-500 (#EF4444) */
-  --card-bg: 255 255 255;            /* Pure white cards */
-  --border: 229 231 235;             /* Light gray border (#E5E7EB) */
-
-  /* ShadCN-compatible variables */
-  --background: var(--bg);
-  --foreground: var(--text-primary);
-  --card: var(--card-bg);
-  --card-foreground: var(--text-primary);
-  --popover: var(--card-bg);
-  --popover-foreground: var(--text-primary);
-  --primary: var(--accent);
-  --primary-foreground: 255 255 255;
-  --secondary: 243 244 246;          /* Neutral light gray (#F3F4F6) */
-  --secondary-foreground: var(--text-primary);
-  --muted: 248 250 252;
-  --muted-foreground: var(--text-secondary);
-  --accent-color: var(--accent);
-  --accent-foreground: 255 255 255;
-  --destructive: var(--error);
-  --destructive-foreground: 255 255 255;
-  --input: var(--border);
-  --ring: var(--accent);
-  --radius: 0.75rem;
-  }
-
-  .dark {
-    /* Dark Mode Variables */
-    --bg: 17 24 39;                    /* Dark slate background */
-  --text-primary: 243 244 246;       /* Light gray text (#F3F4F6) */
-  --text-secondary: 156 163 175;     /* Mid gray (#9CA3AF) */
-  --accent: 147 197 253;             /* Light blue (#93C5FD) */
-  --accent-hover: 96 165 250;        /* Blue-400 (#60A5FA) */
-  --success: 74 222 128;             /* Green-400 (#4ADE80) */
-  --error: 248 113 113;              /* Red-400 (#F87171) */
-  --card-bg: 30 41 59;               /* Deep card background (#1E293B) */
-  --border: 51 65 85;                /* Darker border (#334155) */
-
-  --background: var(--bg);
-  --foreground: var(--text-primary);
-  --card: var(--card-bg);
-  --card-foreground: var(--text-primary);
-  --popover: var(--card-bg);
-  --popover-foreground: var(--text-primary);
-  --primary: var(--accent);
-  --primary-foreground: 17 24 39;
-  --secondary: 38 50 72;
-  --secondary-foreground: var(--text-primary);
-  --muted: 55 65 81;
-  --muted-foreground: var(--text-secondary);
-  --accent-color: var(--accent);
-  --accent-foreground: 17 24 39;
-  --destructive: var(--error);
-  --destructive-foreground: 17 24 39;
-  --input: var(--border);
-  --ring: var(--accent);
-  --radius: 0.75rem;
+    /* Unified Color Palette */
+    --background: #ffffff;
+    --card-bg: #fffbea;
+    --text-primary: #2e2e2e;
+    --text-secondary: #6b7280;
+    --button-bg: #f97316;
+    --button-hover: #ea580c;
+    --button-text: #ffffff;
+    --border: #e5e7eb;
+    
+    /* ShadCN-compatible variables */
+    --foreground: #2e2e2e;
+    --card: #fffbea;
+    --card-foreground: #2e2e2e;
+    --popover: #fffbea;
+    --popover-foreground: #2e2e2e;
+    --primary: #f97316;
+    --primary-foreground: #ffffff;
+    --secondary: #f3f4f6;
+    --secondary-foreground: #2e2e2e;
+    --muted: #f9fafb;
+    --muted-foreground: #6b7280;
+    --accent: #f97316;
+    --accent-foreground: #ffffff;
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    --input: #e5e7eb;
+    --ring: #f97316;
+    --radius: 0.75rem;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: #e5e7eb;
   }
 
   body {
-    @apply bg-background text-foreground font-inter;
+    background-color: #ffffff;
+    color: #2e2e2e;
+    font-family: 'Inter', sans-serif;
   }
 }
 
 @layer utilities {
-  .glass-card {
-    @apply bg-card/90 backdrop-blur-md border border-border shadow-lg;
+  .card-bg {
+    background-color: #fffbea;
+    color: #2e2e2e;
+    border: 1px solid #e5e7eb;
   }
   
   .hover-lift {
-    @apply transition-all duration-200 hover:scale-[1.02] hover:shadow-xl;
+    transition: all 0.2s ease-out;
+  }
+  
+  .hover-lift:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
   
   .text-gradient {
-    @apply bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent;
+    background: linear-gradient(to right, #f97316, #ea580c);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
   }
 
   .logo-white {

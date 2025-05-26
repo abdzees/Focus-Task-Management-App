@@ -2,10 +2,9 @@
 import { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
-import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from '@/components/ui/dialog';
-import { Moon, Sun, User, Trash2, RotateCcw } from 'lucide-react';
+import { User, Trash2, RotateCcw } from 'lucide-react';
 import { loadSettings, saveSettings, resetAllData, AppSettings } from '@/utils/localStorage';
 import { toast } from '@/hooks/use-toast';
 
@@ -20,13 +19,6 @@ const Settings = () => {
   useEffect(() => {
     const savedSettings = loadSettings();
     setSettings(savedSettings);
-    
-    // Apply dark mode
-    if (savedSettings.darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
   }, []);
 
   const updateSetting = (key: keyof AppSettings, value: any) => {
@@ -34,20 +26,6 @@ const Settings = () => {
     setSettings(newSettings);
     saveSettings(newSettings);
 
-    // Handle dark mode toggle
-    if (key === 'darkMode') {
-      if (value) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-      toast({
-        title: `${value ? 'Dark' : 'Light'} mode enabled`,
-        description: "Your preference has been saved",
-      });
-    }
-
-    // Handle week start change
     if (key === 'weekStart') {
       toast({
         title: `Week starts on ${value === 'sunday' ? 'Sunday' : 'Monday'}`,
@@ -60,21 +38,18 @@ const Settings = () => {
     resetAllData();
     setIsResetDialogOpen(false);
     
-    // Reset settings to default
     const defaultSettings: AppSettings = {
       darkMode: false,
       defaultView: 'dashboard',
       weekStart: 'monday'
     };
     setSettings(defaultSettings);
-    document.documentElement.classList.remove('dark');
     
     toast({
       title: "App reset successfully",
       description: "All data has been cleared",
     });
     
-    // Refresh the page to reset all state
     setTimeout(() => {
       window.location.reload();
     }, 1000);
@@ -82,64 +57,43 @@ const Settings = () => {
 
   return (
     <Layout>
-      <div className="max-w-2xl mx-auto space-y-6 animate-fade-in bg-transparent">
+      <div className="max-w-2xl mx-auto space-y-6 bg-transparent">
         {/* Header */}
         <div className="bg-transparent">
-          <h1 className="text-2xl md:text-3xl font-bold text-foreground">Settings</h1>
-          <p className="text-muted-foreground">Customize your productivity experience</p>
+          <h1 className="text-2xl md:text-3xl font-bold text-[#2e2e2e]">Settings</h1>
+          <p className="text-[#6b7280]">Customize your productivity experience</p>
         </div>
 
         {/* Profile Section */}
-        <div className="bg-card rounded-lg p-6 space-y-4 border border-border">
+        <div className="bg-[#fffbea] rounded-lg p-6 space-y-4 border border-[#e5e7eb]">
           <div className="flex items-center gap-2 mb-4 bg-transparent">
-            <User className="w-5 h-5 text-primary" />
-            <h2 className="text-lg font-semibold text-foreground">Profile</h2>
+            <User className="w-5 h-5 text-[#f97316]" />
+            <h2 className="text-lg font-semibold text-[#2e2e2e]">Profile</h2>
           </div>
           
           <div className="flex items-center gap-4 bg-transparent">
-            <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent-hover rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 bg-gradient-to-br from-[#f97316] to-[#ea580c] rounded-full flex items-center justify-center">
               <span className="text-white font-semibold text-xl">U</span>
             </div>
             <div className="bg-transparent">
-              <h3 className="font-medium text-foreground">Local User</h3>
-              <p className="text-sm text-muted-foreground">Data stored locally on this device</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Appearance Section */}
-        <div className="bg-card rounded-lg p-6 space-y-4 border border-border">
-          <div className="flex items-center gap-2 mb-4 bg-transparent">
-            {settings.darkMode ? <Moon className="w-5 h-5 text-primary" /> : <Sun className="w-5 h-5 text-primary" />}
-            <h2 className="text-lg font-semibold text-foreground">Appearance</h2>
-          </div>
-          
-          <div className="space-y-4 bg-transparent">
-            <div className="flex items-center justify-between bg-transparent">
-              <div className="bg-transparent">
-                <label className="text-sm font-medium text-foreground">Dark Mode</label>
-                <p className="text-xs text-muted-foreground">Switch between light and dark themes</p>
-              </div>
-              <Switch 
-                checked={settings.darkMode}
-                onCheckedChange={(checked) => updateSetting('darkMode', checked)}
-              />
+              <h3 className="font-medium text-[#2e2e2e]">Local User</h3>
+              <p className="text-sm text-[#6b7280]">Data stored locally on this device</p>
             </div>
           </div>
         </div>
 
         {/* Productivity Section */}
-        <div className="bg-card rounded-lg p-6 space-y-4 border border-border">
+        <div className="bg-[#fffbea] rounded-lg p-6 space-y-4 border border-[#e5e7eb]">
           <div className="flex items-center gap-2 mb-4 bg-transparent">
-            <RotateCcw className="w-5 h-5 text-primary" />
-            <h2 className="text-lg font-semibold text-foreground">Productivity</h2>
+            <RotateCcw className="w-5 h-5 text-[#f97316]" />
+            <h2 className="text-lg font-semibold text-[#2e2e2e]">Productivity</h2>
           </div>
           
           <div className="space-y-4 bg-transparent">
             <div className="flex items-center justify-between bg-transparent">
               <div className="bg-transparent">
-                <label className="text-sm font-medium text-foreground">Week Start</label>
-                <p className="text-xs text-muted-foreground">First day of the week in calendar</p>
+                <label className="text-sm font-medium text-[#2e2e2e]">Week Start</label>
+                <p className="text-xs text-[#6b7280]">First day of the week in calendar</p>
               </div>
               <Select 
                 value={settings.weekStart} 
@@ -158,10 +112,10 @@ const Settings = () => {
         </div>
 
         {/* Data Section */}
-        <div className="bg-card rounded-lg p-6 space-y-4 border border-border">
+        <div className="bg-[#fffbea] rounded-lg p-6 space-y-4 border border-[#e5e7eb]">
           <div className="flex items-center gap-2 mb-4 bg-transparent">
-            <Trash2 className="w-5 h-5 text-primary" />
-            <h2 className="text-lg font-semibold text-foreground">Data Management</h2>
+            <Trash2 className="w-5 h-5 text-[#f97316]" />
+            <h2 className="text-lg font-semibold text-[#2e2e2e]">Data Management</h2>
           </div>
           
           <div className="space-y-3 bg-transparent">
@@ -194,7 +148,7 @@ const Settings = () => {
         </div>
 
         {/* Footer */}
-        <div className="text-center text-sm text-muted-foreground py-4 bg-transparent">
+        <div className="text-center text-sm text-[#6b7280] py-4 bg-transparent">
           <p>Focus v1.0.0 • Made by Abdullah Zeeshan</p>
         </div>
       </div>

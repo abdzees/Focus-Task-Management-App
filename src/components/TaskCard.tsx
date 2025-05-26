@@ -38,14 +38,14 @@ const TaskCard = ({ task, onToggle, onEdit }: TaskCardProps) => {
 
   return (
     <div
-      className={`glass-card rounded-lg p-4 transition-all duration-200 hover-lift cursor-pointer ${
+      className={`bg-[#fffbea] border border-[#e5e7eb] rounded-lg p-4 transition-all duration-200 hover-lift cursor-pointer ${
         task.completed ? 'opacity-70' : ''
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => onEdit && onEdit(task)}
     >
-      <div className="flex items-start gap-3">
+      <div className="flex items-start gap-3 bg-transparent">
         <Button
           variant="ghost"
           size="sm"
@@ -55,8 +55,8 @@ const TaskCard = ({ task, onToggle, onEdit }: TaskCardProps) => {
           }}
           className={`p-1 rounded-md ${
             task.completed 
-              ? 'text-success-green hover:text-success-green' 
-              : 'text-gentle-gray hover:text-primary'
+              ? 'text-green-600 hover:text-green-600' 
+              : 'text-[#6b7280] hover:text-[#f97316]'
           }`}
         >
           {task.completed ? (
@@ -66,13 +66,13 @@ const TaskCard = ({ task, onToggle, onEdit }: TaskCardProps) => {
           )}
         </Button>
 
-        <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between">
+        <div className="flex-1 min-w-0 bg-transparent">
+          <div className="flex items-start justify-between bg-transparent">
             <h3 
               className={`font-medium text-sm leading-relaxed ${
                 task.completed 
-                  ? 'line-through text-muted-foreground' 
-                  : 'text-foreground'
+                  ? 'line-through text-[#6b7280]' 
+                  : 'text-[#2e2e2e]'
               }`}
             >
               {task.title}
@@ -94,14 +94,14 @@ const TaskCard = ({ task, onToggle, onEdit }: TaskCardProps) => {
           </div>
           
           {task.description && (
-            <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+            <p className="text-xs text-[#6b7280] mt-1 leading-relaxed">
               {task.description}
             </p>
           )}
 
-          <div className="flex items-center gap-3 mt-2">
+          <div className="flex items-center gap-3 mt-2 bg-transparent">
             {task.priority !== 'low' && (
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1 bg-transparent">
                 <Flag className={`w-3 h-3 ${priorityColors[task.priority]}`} />
                 <span className={`text-xs font-medium ${priorityColors[task.priority]}`}>
                   {task.priority}
@@ -110,18 +110,18 @@ const TaskCard = ({ task, onToggle, onEdit }: TaskCardProps) => {
             )}
 
             {task.dueDate && (
-              <div className="flex items-center gap-1 text-muted-foreground">
+              <div className="flex items-center gap-1 text-[#6b7280] bg-transparent">
                 <CalendarIcon className="w-3 h-3" />
                 <span className="text-xs">{formatDate(task.dueDate)}</span>
               </div>
             )}
 
             {task.tags && task.tags.length > 0 && (
-              <div className="flex gap-1">
+              <div className="flex gap-1 bg-transparent">
                 {task.tags.map((tag, index) => (
                   <span
                     key={index}
-                    className="px-2 py-0.5 text-xs rounded-full bg-primary/10 text-primary"
+                    className="px-2 py-0.5 text-xs rounded-full bg-[#f97316]/10 text-[#f97316]"
                   >
                     {tag}
                   </span>
