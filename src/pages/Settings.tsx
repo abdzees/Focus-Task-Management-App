@@ -4,7 +4,6 @@ import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Separator } from '@/components/ui/separator';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from '@/components/ui/dialog';
 import { Moon, Sun, User, Trash2, RotateCcw } from 'lucide-react';
 import { loadSettings, saveSettings, resetAllData, AppSettings } from '@/utils/localStorage';
@@ -45,6 +44,14 @@ const Settings = () => {
       toast({
         title: `${value ? 'Dark' : 'Light'} mode enabled`,
         description: "Your preference has been saved",
+      });
+    }
+
+    // Handle week start change
+    if (key === 'weekStart') {
+      toast({
+        title: `Week starts on ${value === 'sunday' ? 'Sunday' : 'Monday'}`,
+        description: "Calendar view will update accordingly",
       });
     }
   };
@@ -90,7 +97,7 @@ const Settings = () => {
           </div>
           
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent-hover rounded-full flex items-center justify-center">
               <span className="text-white font-semibold text-xl">U</span>
             </div>
             <div>
@@ -131,28 +138,8 @@ const Settings = () => {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <label className="text-sm font-medium text-foreground">Default View</label>
-                <p className="text-xs text-muted-foreground">Your preferred starting page</p>
-              </div>
-              <Select 
-                value={settings.defaultView} 
-                onValueChange={(value) => updateSetting('defaultView', value)}
-              >
-                <SelectTrigger className="w-32">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="dashboard">Dashboard</SelectItem>
-                  <SelectItem value="tasks">Tasks</SelectItem>
-                  <SelectItem value="calendar">Calendar</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            
-            <div className="flex items-center justify-between">
-              <div>
                 <label className="text-sm font-medium text-foreground">Week Start</label>
-                <p className="text-xs text-muted-foreground">First day of the week</p>
+                <p className="text-xs text-muted-foreground">First day of the week in calendar</p>
               </div>
               <Select 
                 value={settings.weekStart} 

@@ -7,72 +7,70 @@
 
 @layer base {
   :root {
-    --background: 255 255 255;
-    --foreground: 15 23 42;
+    /* Light Mode Variables */
+    --bg: 249 250 251;
+    --text-primary: 31 41 55;
+    --text-secondary: 107 114 128;
+    --accent: 37 99 235;
+    --accent-hover: 29 78 216;
+    --success: 16 185 129;
+    --error: 239 68 68;
+    --card-bg: 255 255 255;
+    --border: 229 231 235;
 
-    --card: 255 255 255;
-    --card-foreground: 15 23 42;
-
-    --popover: 255 255 255;
-    --popover-foreground: 15 23 42;
-
-    --primary: 59 130 246;
+    /* Existing shadcn variables */
+    --background: var(--bg);
+    --foreground: var(--text-primary);
+    --card: var(--card-bg);
+    --card-foreground: var(--text-primary);
+    --popover: var(--card-bg);
+    --popover-foreground: var(--text-primary);
+    --primary: var(--accent);
     --primary-foreground: 255 255 255;
-
     --secondary: 241 245 249;
-    --secondary-foreground: 15 23 42;
-
+    --secondary-foreground: var(--text-primary);
     --muted: 248 250 252;
-    --muted-foreground: 71 85 105;
-
-    --accent: 239 68 68;
+    --muted-foreground: var(--text-secondary);
+    --accent-color: var(--accent);
     --accent-foreground: 255 255 255;
-
-    --destructive: 220 38 38;
+    --destructive: var(--error);
     --destructive-foreground: 255 255 255;
-
-    --border: 226 232 240;
-    --input: 226 232 240;
-    --ring: 59 130 246;
-
+    --input: var(--border);
+    --ring: var(--accent);
     --radius: 0.75rem;
-
-    /* High contrast productivity app colors */
-    --calm-blue: 59 130 246;
-    --soft-lavender: 124 58 237;
-    --coral-accent: 239 68 68;
-    --success-green: 22 163 74;
-    --gentle-gray: 71 85 105;
   }
 
   .dark {
-    --background: 15 23 42;
-    --foreground: 248 250 252;
+    /* Dark Mode Variables */
+    --bg: 17 24 39;
+    --text-primary: 249 250 251;
+    --text-secondary: 156 163 175;
+    --accent: 59 130 246;
+    --accent-hover: 37 99 235;
+    --success: 52 211 153;
+    --error: 248 113 113;
+    --card-bg: 31 41 55;
+    --border: 55 65 81;
 
-    --card: 30 41 59;
-    --card-foreground: 248 250 252;
-
-    --popover: 30 41 59;
-    --popover-foreground: 248 250 252;
-
-    --primary: 99 102 241;
-    --primary-foreground: 15 23 42;
-
-    --secondary: 51 65 85;
-    --secondary-foreground: 248 250 252;
-
-    --muted: 51 65 85;
-    --muted-foreground: 148 163 184;
-
-    --accent: 248 113 113;
-    --accent-foreground: 15 23 42;
-
-    --destructive: 239 68 68;
-    --destructive-foreground: 248 250 252;
-
-    --border: 71 85 105;
-    --input: 71 85 105;
-    --ring: 99 102 241;
+    /* Existing shadcn variables updated for dark mode */
+    --background: var(--bg);
+    --foreground: var(--text-primary);
+    --card: var(--card-bg);
+    --card-foreground: var(--text-primary);
+    --popover: var(--card-bg);
+    --popover-foreground: var(--text-primary);
+    --primary: var(--accent);
+    --primary-foreground: 17 24 39;
+    --secondary: 55 65 81;
+    --secondary-foreground: var(--text-primary);
+    --muted: 55 65 81;
+    --muted-foreground: var(--text-secondary);
+    --accent-color: var(--accent);
+    --accent-foreground: 17 24 39;
+    --destructive: var(--error);
+    --destructive-foreground: var(--text-primary);
+    --input: var(--border);
+    --ring: var(--accent);
   }
 }
 
@@ -88,11 +86,7 @@
 
 @layer utilities {
   .glass-card {
-    @apply bg-white/90 backdrop-blur-md border border-slate-200 shadow-lg;
-  }
-  
-  .glass-card-dark {
-    @apply bg-slate-800/90 backdrop-blur-md border border-slate-600 shadow-lg;
+    @apply bg-card/90 backdrop-blur-md border border-border shadow-lg;
   }
   
   .hover-lift {
@@ -100,6 +94,6 @@
   }
   
   .text-gradient {
-    @apply bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-accent to-accent-hover bg-clip-text text-transparent;
   }
 }

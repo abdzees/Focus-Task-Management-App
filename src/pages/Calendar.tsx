@@ -1,37 +1,38 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
+import EventModal from '@/components/EventModal';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Plus, ChevronLeft, ChevronRight } from 'lucide-react';
-
-interface Event {
-  id: string;
-  title: string;
-  date: string;
-  type: 'exam' | 'deadline' | 'task' | 'reminder';
-  description?: string;
-  time?: string;
-}
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
+import { Plus, ChevronLeft, ChevronRight, Trash2 } from 'lucide-react';
+import { CalendarEvent, loadEvents, saveEvents, loadSettings } from '@/utils/localStorage';
+import { toast } from '@/hooks/use-toast';
 
 const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [events, setEvents] = useState<Event[]>([
-    { id: '1', title: 'Economics Final Exam', date: '2025-06-02', type: 'exam', time: '10:00 AM' },
-    { id: '2', title: 'Project Deadline', date: '2025-06-05', type: 'deadline', time: '11:59 PM' },
-    { id: '3', title: 'Team Meeting', date: '2025-05-29', type: 'task', time: '2:00 PM' },
-    { id: '4', title: 'Doctor Appointment', date: '2025-05-30', type: 'reminder', time: '3:30 PM' },
-    { id: '5', title: 'Study Group', date: '2025-06-01', type: 'task', time: '7:00 PM' },
-    { id: '6', title: 'Math Quiz', date: '2025-05-28', type: 'exam', time: '9:00 AM' },
-    { id: '7', title: 'Book Club Meeting', date: '2025-06-03', type: 'reminder', time: '6:00 PM' }
-  ]);
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [isEventModalOpen, setIsEventModalOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<string>('');
+  const [eventToDelete, setEventToDelete] = useState<CalendarEvent | null>(null);
+  const [weekStart, setWeekStart] = useState<'sunday' | 'monday'>('monday');
+
+  useEffect(() => {
+    const savedEvents = loadEvents();
+    setEvents(savedEvents);
+    
+    const settings = loadSettings();
+    setWeekStart(settings.weekStart);
+  }, []);
 
   const monthNames = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
-  const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const dayNames = weekStart === 'sunday' 
+    ? ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
   const getDaysInMonth = (date: Date) => {
     const year = date.getFullYear();
@@ -39,7 +40,12 @@ const Calendar = () => {
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
     const daysInMonth = lastDay.getDate();
-    const startingDayOfWeek = firstDay.getDay();
+    let startingDayOfWeek = firstDay.getDay();
+    
+    // Adjust for Monday start
+    if (weekStart === 'monday') {
+      startingDayOfWeek = startingDayOfWeek === 0 ? 6 : startingDayOfWeek - 1;
+    }
 
     const days = [];
     
@@ -82,12 +88,46 @@ const Calendar = () => {
 
   const getEventTypeColor = (type: string) => {
     switch (type) {
-      case 'exam': return 'bg-red-500/20 text-red-700 border-red-200';
-      case 'deadline': return 'bg-coral-accent/20 text-orange-700 border-orange-200';
-      case 'task': return 'bg-blue-500/20 text-blue-700 border-blue-200';
+      case 'exam': return 'bg-error/20 text-red-700 border-red-200';
+      case 'deadline': return 'bg-orange-500/20 text-orange-700 border-orange-200';
+      case 'task': return 'bg-accent/20 text-blue-700 border-blue-200';
       case 'reminder': return 'bg-purple-500/20 text-purple-700 border-purple-200';
       default: return 'bg-gray-500/20 text-gray-700 border-gray-200';
     }
+  };
+
+  const handleCreateEvent = () => {
+    setSelectedDate('');
+    setIsEventModalOpen(true);
+  };
+
+  const handleSaveEvent = (eventData: Omit<CalendarEvent, 'id' | 'createdAt'>) => {
+    const newEvent: CalendarEvent = {
+      ...eventData,
+      id: crypto.randomUUID(),
+      createdAt: new Date().toISOString(),
+    };
+
+    const updatedEvents = [...events, newEvent];
+    setEvents(updatedEvents);
+    saveEvents(updatedEvents);
+    
+    toast({
+      title: "Event created",
+      description: "Your event has been added to the calendar",
+    });
+  };
+
+  const handleDeleteEvent = (event: CalendarEvent) => {
+    const updatedEvents = events.filter(e => e.id !== event.id);
+    setEvents(updatedEvents);
+    saveEvents(updatedEvents);
+    setEventToDelete(null);
+    
+    toast({
+      title: "Event deleted",
+      description: "The event has been removed from your calendar",
+    });
   };
 
   const days = getDaysInMonth(currentDate);
@@ -101,7 +141,7 @@ const Calendar = () => {
             <h1 className="text-2xl md:text-3xl font-bold text-foreground">Calendar</h1>
             <p className="text-muted-foreground">Manage your schedule and important dates</p>
           </div>
-          <Button className="gap-2">
+          <Button className="gap-2" onClick={handleCreateEvent}>
             <Plus className="w-4 h-4" />
             New Event
           </Button>
@@ -161,7 +201,7 @@ const Calendar = () => {
                     date 
                       ? isCurrentDay 
                         ? 'bg-primary/10 border-primary/30' 
-                        : 'bg-white/50 border-gray-200 hover:bg-white/70'
+                        : 'bg-card/50 border-border hover:bg-card/70'
                       : 'bg-transparent'
                   }`}
                 >
@@ -177,8 +217,9 @@ const Calendar = () => {
                         {dayEvents.slice(0, 2).map(event => (
                           <div
                             key={event.id}
-                            className={`text-xs p-1 rounded text-center truncate border ${getEventTypeColor(event.type)}`}
-                            title={`${event.title} ${event.time ? `at ${event.time}` : ''}`}
+                            className={`text-xs p-1 rounded text-center truncate border cursor-pointer hover:opacity-80 ${getEventTypeColor(event.type)}`}
+                            title={`${event.title} - Click to delete`}
+                            onClick={() => setEventToDelete(event)}
                           >
                             {event.title}
                           </div>
@@ -208,15 +249,15 @@ const Calendar = () => {
                 .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
                 .slice(0, 5)
                 .map(event => (
-                  <div key={event.id} className="flex items-center justify-between p-3 rounded-md hover:bg-white/10 transition-colors">
+                  <div key={event.id} className="flex items-center justify-between p-3 rounded-md hover:bg-card/10 transition-colors">
                     <div className="flex items-center gap-3">
                       <Badge variant="outline" className={getEventTypeColor(event.type)}>
                         {event.type}
                       </Badge>
                       <div>
                         <div className="text-sm font-medium text-foreground">{event.title}</div>
-                        {event.time && (
-                          <div className="text-xs text-muted-foreground">{event.time}</div>
+                        {event.description && (
+                          <div className="text-xs text-muted-foreground">{event.description}</div>
                         )}
                       </div>
                     </div>
@@ -231,7 +272,6 @@ const Calendar = () => {
             </div>
           </div>
 
-          {/* Event Types Legend */}
           <div className="space-y-4">
             <h2 className="text-lg font-semibold text-foreground">Event Types</h2>
             <div className="glass-card rounded-lg p-4 space-y-3">
@@ -253,6 +293,39 @@ const Calendar = () => {
           </div>
         </div>
       </div>
+
+      {/* Event Modal */}
+      <EventModal
+        isOpen={isEventModalOpen}
+        onClose={() => setIsEventModalOpen(false)}
+        onSave={handleSaveEvent}
+        selectedDate={selectedDate}
+      />
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={!!eventToDelete} onOpenChange={() => setEventToDelete(null)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Delete Event</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete "{eventToDelete?.title}"? This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setEventToDelete(null)}>
+              Cancel
+            </Button>
+            <Button 
+              variant="destructive" 
+              onClick={() => eventToDelete && handleDeleteEvent(eventToDelete)}
+              className="gap-2"
+            >
+              <Trash2 className="w-4 h-4" />
+              Delete
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </Layout>
   );
 };
