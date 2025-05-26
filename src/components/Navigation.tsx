@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Calendar, CheckSquare, Target, Home, Settings, Menu, X } from 'lucide-react';
+import { Calendar, CheckSquare, Home, Settings, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Navigation = () => {
@@ -11,7 +11,6 @@ const Navigation = () => {
   const navItems = [
     { path: '/', label: 'Dashboard', icon: Home },
     { path: '/tasks', label: 'Tasks', icon: CheckSquare },
-    { path: '/goals', label: 'Goals', icon: Target },
     { path: '/calendar', label: 'Calendar', icon: Calendar },
     { path: '/settings', label: 'Settings', icon: Settings },
   ];
@@ -21,7 +20,7 @@ const Navigation = () => {
   return (
     <>
       {/* Desktop Navigation */}
-      <nav className="hidden md:flex fixed top-0 left-0 right-0 z-50 glass-card border-b border-white/10 backdrop-blur-xl">
+      <nav className="hidden md:flex fixed top-0 left-0 right-0 z-50 glass-card border-b border-border backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-6 py-4 w-full">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-8">
@@ -35,8 +34,8 @@ const Navigation = () => {
                       to={item.path}
                       className={`flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                         isActive(item.path)
-                          ? 'bg-primary/10 text-primary shadow-md'
-                          : 'text-muted-foreground hover:text-foreground hover:bg-white/5'
+                          ? 'bg-primary text-primary-foreground shadow-md'
+                          : 'text-foreground hover:text-primary hover:bg-secondary'
                       }`}
                     >
                       <Icon className="w-4 h-4 mr-2" />
@@ -51,7 +50,7 @@ const Navigation = () => {
       </nav>
 
       {/* Mobile Navigation */}
-      <nav className="md:hidden fixed top-0 left-0 right-0 z-50 glass-card border-b border-white/10 backdrop-blur-xl">
+      <nav className="md:hidden fixed top-0 left-0 right-0 z-50 glass-card border-b border-border backdrop-blur-xl">
         <div className="px-4 py-4">
           <div className="flex items-center justify-between">
             <h1 className="text-xl font-semibold text-gradient">Focus</h1>
@@ -68,7 +67,7 @@ const Navigation = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="absolute top-full left-0 right-0 glass-card border-t border-white/10 animate-slide-in">
+          <div className="absolute top-full left-0 right-0 glass-card border-t border-border animate-slide-in">
             <div className="px-4 py-4 space-y-2">
               {navItems.map((item) => {
                 const Icon = item.icon;
@@ -79,8 +78,8 @@ const Navigation = () => {
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
                       isActive(item.path)
-                        ? 'bg-primary/10 text-primary shadow-md'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-white/5'
+                        ? 'bg-primary text-primary-foreground shadow-md'
+                        : 'text-foreground hover:text-primary hover:bg-secondary'
                     }`}
                   >
                     <Icon className="w-4 h-4 mr-3" />

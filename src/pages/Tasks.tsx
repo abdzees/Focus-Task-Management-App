@@ -1,81 +1,90 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import TaskCard from '@/components/TaskCard';
+import TaskModal from '@/components/TaskModal';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Plus, Search, Filter } from 'lucide-react';
-
-interface Task {
-  id: string;
-  title: string;
-  description?: string;
-  completed: boolean;
-  priority: 'low' | 'medium' | 'high';
-  dueDate?: string;
-  tags?: string[];
-}
+import { Plus, Search, Filter, Trash2 } from 'lucide-react';
+import { loadTasks, saveTasks, Task } from '@/utils/localStorage';
+import { toast } from '@/hooks/use-toast';
 
 const Tasks = () => {
-  const [tasks, setTasks] = useState<Task[]>([
-    {
-      id: '1',
-      title: 'Review chapter 5 for Economics exam',
-      description: 'Focus on supply and demand curves',
-      completed: false,
-      priority: 'high',
-      dueDate: '2025-05-28',
-      tags: ['study', 'economics']
-    },
-    {
-      id: '2',
-      title: 'Submit project proposal',
-      completed: false,
-      priority: 'medium',
-      dueDate: '2025-05-30',
-      tags: ['work']
-    },
-    {
-      id: '3',
-      title: 'Morning workout',
-      completed: true,
-      priority: 'low',
-      tags: ['health']
-    },
-    {
-      id: '4',
-      title: 'Call dentist for appointment',
-      completed: false,
-      priority: 'medium',
-      tags: ['personal']
-    },
-    {
-      id: '5',
-      title: 'Prepare presentation slides',
-      description: 'For the client meeting next week',
-      completed: false,
-      priority: 'high',
-      dueDate: '2025-06-01',
-      tags: ['work', 'presentation']
-    },
-    {
-      id: '6',
-      title: 'Read "Deep Work" chapter 3',
-      completed: true,
-      priority: 'low',
-      tags: ['reading', 'self-improvement']
-    }
-  ]);
-
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState<'all' | 'active' | 'completed'>('all');
   const [filterPriority, setFilterPriority] = useState<'all' | 'high' | 'medium' | 'low'>('all');
+  const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
+  const [editingTask, setEditingTask] = useState<Task | undefined>();
+
+  useEffect(() => {
+    setTasks(loadTasks());
+  }, []);
 
   const toggleTask = (id: string) => {
-    setTasks(tasks.map(task => 
+    const updatedTasks = tasks.map(task => 
       task.id === id ? { ...task, completed: !task.completed } : task
-    ));
+    );
+    setTasks(updatedTasks);
+    saveTasks(updatedTasks);
+    
+    const task = updatedTasks.find(t => t.id === id);
+    if (task) {
+      toast({
+        title: task.completed ? "Task completed!" : "Task reopened",
+        description: task.title,
+      });
+    }
+  };
+
+  const handleCreateTask = (taskData: Omit<Task, 'id' | 'createdAt'>) => {
+    const newTask: Task = {
+      ...taskData,
+      id: Date.now().toString(),
+      createdAt: new Date().toISOString(),
+    };
+    
+    const updatedTasks = [...tasks, newTask];
+    setTasks(updatedTasks);
+    saveTasks(updatedTasks);
+    
+    toast({
+      title: "Task created!",
+      description: newTask.title,
+    });
+  };
+
+  const handleEditTask = (taskData: Omit<Task, 'id' | 'createdAt'>) => {
+    if (!editingTask) return;
+    
+    const updatedTasks = tasks.map(task => 
+      task.id === editingTask.id 
+        ? { ...task, ...taskData }
+        : task
+    );
+    setTasks(updatedTasks);
+    saveTasks(updatedTasks);
+    setEditingTask(undefined);
+    
+    toast({
+      title: "Task updated!",
+      description: taskData.title,
+    });
+  };
+
+  const deleteTask = (id: string) => {
+    const taskToDelete = tasks.find(t => t.id === id);
+    const updatedTasks = tasks.filter(task => task.id !== id);
+    setTasks(updatedTasks);
+    saveTasks(updatedTasks);
+    
+    if (taskToDelete) {
+      toast({
+        title: "Task deleted",
+        description: taskToDelete.title,
+      });
+    }
   };
 
   const filteredTasks = tasks.filter(task => {
@@ -94,6 +103,16 @@ const Tasks = () => {
   const activeTasks = filteredTasks.filter(task => !task.completed);
   const completedTasks = filteredTasks.filter(task => task.completed);
 
+  const openEditModal = (task: Task) => {
+    setEditingTask(task);
+    setIsTaskModalOpen(true);
+  };
+
+  const closeTaskModal = () => {
+    setIsTaskModalOpen(false);
+    setEditingTask(undefined);
+  };
+
   return (
     <Layout>
       <div className="space-y-6 animate-fade-in">
@@ -103,7 +122,7 @@ const Tasks = () => {
             <h1 className="text-2xl md:text-3xl font-bold text-foreground">Tasks</h1>
             <p className="text-muted-foreground">Organize and track your daily activities</p>
           </div>
-          <Button className="gap-2">
+          <Button className="gap-2" onClick={() => setIsTaskModalOpen(true)}>
             <Plus className="w-4 h-4" />
             New Task
           </Button>
@@ -160,11 +179,21 @@ const Tasks = () => {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {activeTasks.map((task) => (
-                  <TaskCard 
-                    key={task.id} 
-                    task={task} 
-                    onToggle={toggleTask} 
-                  />
+                  <div key={task.id} className="relative group">
+                    <TaskCard 
+                      task={task} 
+                      onToggle={toggleTask}
+                      onEdit={openEditModal}
+                    />
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity bg-background/80 hover:bg-destructive hover:text-destructive-foreground"
+                      onClick={() => deleteTask(task.id)}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
                 ))}
               </div>
             </div>
@@ -180,11 +209,21 @@ const Tasks = () => {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {completedTasks.map((task) => (
-                  <TaskCard 
-                    key={task.id} 
-                    task={task} 
-                    onToggle={toggleTask} 
-                  />
+                  <div key={task.id} className="relative group">
+                    <TaskCard 
+                      task={task} 
+                      onToggle={toggleTask}
+                      onEdit={openEditModal}
+                    />
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity bg-background/80 hover:bg-destructive hover:text-destructive-foreground"
+                      onClick={() => deleteTask(task.id)}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
                 ))}
               </div>
             </div>
@@ -203,7 +242,7 @@ const Tasks = () => {
                   : 'Create your first task to get started'
                 }
               </p>
-              <Button>
+              <Button onClick={() => setIsTaskModalOpen(true)}>
                 <Plus className="w-4 h-4 mr-2" />
                 Add New Task
               </Button>
@@ -211,6 +250,13 @@ const Tasks = () => {
           )}
         </div>
       </div>
+
+      <TaskModal 
+        isOpen={isTaskModalOpen}
+        onClose={closeTaskModal}
+        onSave={editingTask ? handleEditTask : handleCreateTask}
+        task={editingTask}
+      />
     </Layout>
   );
 };

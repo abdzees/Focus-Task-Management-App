@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { CheckSquare, Square, Calendar as CalendarIcon, Flag } from 'lucide-react';
+import { CheckSquare, Square, Calendar as CalendarIcon, Flag, Edit } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface Task {
@@ -23,9 +23,9 @@ const TaskCard = ({ task, onToggle, onEdit }: TaskCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const priorityColors = {
-    low: 'text-green-500',
-    medium: 'text-coral-accent',
-    high: 'text-red-500',
+    low: 'text-green-600',
+    medium: 'text-amber-600',
+    high: 'text-red-600',
   };
 
   const formatDate = (dateString: string) => {
@@ -38,17 +38,21 @@ const TaskCard = ({ task, onToggle, onEdit }: TaskCardProps) => {
 
   return (
     <div
-      className={`glass-card rounded-lg p-4 transition-all duration-200 hover-lift ${
+      className={`glass-card rounded-lg p-4 transition-all duration-200 hover-lift cursor-pointer ${
         task.completed ? 'opacity-70' : ''
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => onEdit && onEdit(task)}
     >
       <div className="flex items-start gap-3">
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => onToggle(task.id)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggle(task.id);
+          }}
           className={`p-1 rounded-md ${
             task.completed 
               ? 'text-success-green hover:text-success-green' 
@@ -63,15 +67,31 @@ const TaskCard = ({ task, onToggle, onEdit }: TaskCardProps) => {
         </Button>
 
         <div className="flex-1 min-w-0">
-          <h3 
-            className={`font-medium text-sm leading-relaxed ${
-              task.completed 
-                ? 'line-through text-muted-foreground' 
-                : 'text-foreground'
-            }`}
-          >
-            {task.title}
-          </h3>
+          <div className="flex items-start justify-between">
+            <h3 
+              className={`font-medium text-sm leading-relaxed ${
+                task.completed 
+                  ? 'line-through text-muted-foreground' 
+                  : 'text-foreground'
+              }`}
+            >
+              {task.title}
+            </h3>
+            
+            {isHovered && onEdit && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onEdit(task);
+                }}
+                className="p-1 ml-2 opacity-70 hover:opacity-100"
+              >
+                <Edit className="w-4 h-4" />
+              </Button>
+            )}
+          </div>
           
           {task.description && (
             <p className="text-xs text-muted-foreground mt-1 leading-relaxed">

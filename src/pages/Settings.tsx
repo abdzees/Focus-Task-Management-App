@@ -1,12 +1,78 @@
 
+import { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
-import { Bell, Moon, Sun, Globe, User, Shield, Download } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from '@/components/ui/dialog';
+import { Moon, Sun, User, Trash2, RotateCcw } from 'lucide-react';
+import { loadSettings, saveSettings, resetAllData, AppSettings } from '@/utils/localStorage';
+import { toast } from '@/hooks/use-toast';
 
 const Settings = () => {
+  const [settings, setSettings] = useState<AppSettings>({
+    darkMode: false,
+    defaultView: 'dashboard',
+    weekStart: 'monday'
+  });
+  const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
+
+  useEffect(() => {
+    const savedSettings = loadSettings();
+    setSettings(savedSettings);
+    
+    // Apply dark mode
+    if (savedSettings.darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
+  const updateSetting = (key: keyof AppSettings, value: any) => {
+    const newSettings = { ...settings, [key]: value };
+    setSettings(newSettings);
+    saveSettings(newSettings);
+
+    // Handle dark mode toggle
+    if (key === 'darkMode') {
+      if (value) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      toast({
+        title: `${value ? 'Dark' : 'Light'} mode enabled`,
+        description: "Your preference has been saved",
+      });
+    }
+  };
+
+  const handleResetApp = () => {
+    resetAllData();
+    setIsResetDialogOpen(false);
+    
+    // Reset settings to default
+    const defaultSettings: AppSettings = {
+      darkMode: false,
+      defaultView: 'dashboard',
+      weekStart: 'monday'
+    };
+    setSettings(defaultSettings);
+    document.documentElement.classList.remove('dark');
+    
+    toast({
+      title: "App reset successfully",
+      description: "All data has been cleared",
+    });
+    
+    // Refresh the page to reset all state
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+  };
+
   return (
     <Layout>
       <div className="max-w-2xl mx-auto space-y-6 animate-fade-in">
@@ -24,120 +90,33 @@ const Settings = () => {
           </div>
           
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full flex items-center justify-center">
-              <span className="text-white font-semibold text-xl">JD</span>
+            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+              <span className="text-white font-semibold text-xl">U</span>
             </div>
             <div>
-              <h3 className="font-medium text-foreground">John Doe</h3>
-              <p className="text-sm text-muted-foreground">john.doe@example.com</p>
+              <h3 className="font-medium text-foreground">Local User</h3>
+              <p className="text-sm text-muted-foreground">Data stored locally on this device</p>
             </div>
           </div>
-          
-          <Button variant="outline" size="sm">
-            Edit Profile
-          </Button>
         </div>
 
         {/* Appearance Section */}
         <div className="glass-card rounded-lg p-6 space-y-4">
           <div className="flex items-center gap-2 mb-4">
-            <Sun className="w-5 h-5 text-primary" />
+            {settings.darkMode ? <Moon className="w-5 h-5 text-primary" /> : <Sun className="w-5 h-5 text-primary" />}
             <h2 className="text-lg font-semibold text-foreground">Appearance</h2>
           </div>
           
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <label className="text-sm font-medium text-foreground">Theme</label>
-                <p className="text-xs text-muted-foreground">Choose your preferred color scheme</p>
+                <label className="text-sm font-medium text-foreground">Dark Mode</label>
+                <p className="text-xs text-muted-foreground">Switch between light and dark themes</p>
               </div>
-              <Select defaultValue="light">
-                <SelectTrigger className="w-32">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="light">
-                    <div className="flex items-center gap-2">
-                      <Sun className="w-4 h-4" />
-                      Light
-                    </div>
-                  </SelectItem>
-                  <SelectItem value="dark">
-                    <div className="flex items-center gap-2">
-                      <Moon className="w-4 h-4" />
-                      Dark
-                    </div>
-                  </SelectItem>
-                  <SelectItem value="system">
-                    <div className="flex items-center gap-2">
-                      <Globe className="w-4 h-4" />
-                      System
-                    </div>
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            
-            <Separator />
-            
-            <div className="flex items-center justify-between">
-              <div>
-                <label className="text-sm font-medium text-foreground">Compact Mode</label>
-                <p className="text-xs text-muted-foreground">Use smaller cards and spacing</p>
-              </div>
-              <Switch />
-            </div>
-            
-            <div className="flex items-center justify-between">
-              <div>
-                <label className="text-sm font-medium text-foreground">Animations</label>
-                <p className="text-xs text-muted-foreground">Enable smooth transitions</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-          </div>
-        </div>
-
-        {/* Notifications Section */}
-        <div className="glass-card rounded-lg p-6 space-y-4">
-          <div className="flex items-center gap-2 mb-4">
-            <Bell className="w-5 h-5 text-primary" />
-            <h2 className="text-lg font-semibold text-foreground">Notifications</h2>
-          </div>
-          
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <label className="text-sm font-medium text-foreground">Task Reminders</label>
-                <p className="text-xs text-muted-foreground">Get notified about upcoming tasks</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-            
-            <div className="flex items-center justify-between">
-              <div>
-                <label className="text-sm font-medium text-foreground">Goal Milestones</label>
-                <p className="text-xs text-muted-foreground">Celebrate your progress</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-            
-            <div className="flex items-center justify-between">
-              <div>
-                <label className="text-sm font-medium text-foreground">Calendar Events</label>
-                <p className="text-xs text-muted-foreground">Upcoming events and deadlines</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-            
-            <Separator />
-            
-            <div className="flex items-center justify-between">
-              <div>
-                <label className="text-sm font-medium text-foreground">Email Notifications</label>
-                <p className="text-xs text-muted-foreground">Receive digest emails</p>
-              </div>
-              <Switch />
+              <Switch 
+                checked={settings.darkMode}
+                onCheckedChange={(checked) => updateSetting('darkMode', checked)}
+              />
             </div>
           </div>
         </div>
@@ -145,7 +124,7 @@ const Settings = () => {
         {/* Productivity Section */}
         <div className="glass-card rounded-lg p-6 space-y-4">
           <div className="flex items-center gap-2 mb-4">
-            <Shield className="w-5 h-5 text-primary" />
+            <RotateCcw className="w-5 h-5 text-primary" />
             <h2 className="text-lg font-semibold text-foreground">Productivity</h2>
           </div>
           
@@ -155,14 +134,16 @@ const Settings = () => {
                 <label className="text-sm font-medium text-foreground">Default View</label>
                 <p className="text-xs text-muted-foreground">Your preferred starting page</p>
               </div>
-              <Select defaultValue="dashboard">
+              <Select 
+                value={settings.defaultView} 
+                onValueChange={(value) => updateSetting('defaultView', value)}
+              >
                 <SelectTrigger className="w-32">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="dashboard">Dashboard</SelectItem>
                   <SelectItem value="tasks">Tasks</SelectItem>
-                  <SelectItem value="goals">Goals</SelectItem>
                   <SelectItem value="calendar">Calendar</SelectItem>
                 </SelectContent>
               </Select>
@@ -173,7 +154,10 @@ const Settings = () => {
                 <label className="text-sm font-medium text-foreground">Week Start</label>
                 <p className="text-xs text-muted-foreground">First day of the week</p>
               </div>
-              <Select defaultValue="monday">
+              <Select 
+                value={settings.weekStart} 
+                onValueChange={(value: 'sunday' | 'monday') => updateSetting('weekStart', value)}
+              >
                 <SelectTrigger className="w-32">
                   <SelectValue />
                 </SelectTrigger>
@@ -183,49 +167,42 @@ const Settings = () => {
                 </SelectContent>
               </Select>
             </div>
-            
-            <Separator />
-            
-            <div className="flex items-center justify-between">
-              <div>
-                <label className="text-sm font-medium text-foreground">Auto-archive Completed</label>
-                <p className="text-xs text-muted-foreground">Move completed tasks after 7 days</p>
-              </div>
-              <Switch defaultChecked />
-            </div>
-            
-            <div className="flex items-center justify-between">
-              <div>
-                <label className="text-sm font-medium text-foreground">Focus Mode</label>
-                <p className="text-xs text-muted-foreground">Hide completed tasks during work hours</p>
-              </div>
-              <Switch />
-            </div>
           </div>
         </div>
 
         {/* Data Section */}
         <div className="glass-card rounded-lg p-6 space-y-4">
           <div className="flex items-center gap-2 mb-4">
-            <Download className="w-5 h-5 text-primary" />
-            <h2 className="text-lg font-semibold text-foreground">Data & Privacy</h2>
+            <Trash2 className="w-5 h-5 text-primary" />
+            <h2 className="text-lg font-semibold text-foreground">Data Management</h2>
           </div>
           
           <div className="space-y-3">
-            <Button variant="outline" className="w-full justify-start">
-              <Download className="w-4 h-4 mr-2" />
-              Export Data
-            </Button>
-            
-            <Button variant="outline" className="w-full justify-start">
-              Import Data
-            </Button>
-            
-            <Separator />
-            
-            <Button variant="destructive" className="w-full">
-              Delete Account
-            </Button>
+            <Dialog open={isResetDialogOpen} onOpenChange={setIsResetDialogOpen}>
+              <DialogTrigger asChild>
+                <Button variant="destructive" className="w-full">
+                  <Trash2 className="w-4 h-4 mr-2" />
+                  Reset App
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Reset Application</DialogTitle>
+                  <DialogDescription>
+                    This will permanently delete all your tasks, calendar events, and settings. 
+                    This action cannot be undone.
+                  </DialogDescription>
+                </DialogHeader>
+                <DialogFooter>
+                  <Button variant="outline" onClick={() => setIsResetDialogOpen(false)}>
+                    Cancel
+                  </Button>
+                  <Button variant="destructive" onClick={handleResetApp}>
+                    Reset Everything
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
 
