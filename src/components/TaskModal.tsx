@@ -49,14 +49,14 @@ const TaskModal = ({ isOpen, onClose, onSave, task }: TaskModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>{task ? 'Edit Task' : 'Create New Task'}</DialogTitle>
+      <DialogContent className="sm:max-w-md bg-card">
+        <DialogHeader className="bg-transparent">
+          <DialogTitle className="text-foreground">{task ? 'Edit Task' : 'Create New Task'}</DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-4">
-          <div>
-            <Label htmlFor="title">Title</Label>
+        <div className="space-y-4 bg-transparent">
+          <div className="bg-transparent">
+            <Label htmlFor="title" className="text-foreground">Title</Label>
             <Input
               id="title"
               value={title}
@@ -66,8 +66,8 @@ const TaskModal = ({ isOpen, onClose, onSave, task }: TaskModalProps) => {
             />
           </div>
 
-          <div>
-            <Label htmlFor="description">Description</Label>
+          <div className="bg-transparent">
+            <Label htmlFor="description" className="text-foreground">Description</Label>
             <Textarea
               id="description"
               value={description}
@@ -78,9 +78,9 @@ const TaskModal = ({ isOpen, onClose, onSave, task }: TaskModalProps) => {
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="priority">Priority</Label>
+          <div className="grid grid-cols-2 gap-4 bg-transparent">
+            <div className="bg-transparent">
+              <Label htmlFor="priority" className="text-foreground">Priority</Label>
               <Select value={priority} onValueChange={(value: any) => setPriority(value)}>
                 <SelectTrigger className="mt-1">
                   <SelectValue />
@@ -93,8 +93,8 @@ const TaskModal = ({ isOpen, onClose, onSave, task }: TaskModalProps) => {
               </Select>
             </div>
 
-            <div>
-              <Label htmlFor="dueDate">Due Date</Label>
+            <div className="bg-transparent">
+              <Label htmlFor="dueDate" className="text-foreground">Due Date</Label>
               <Input
                 id="dueDate"
                 type="date"
@@ -105,8 +105,8 @@ const TaskModal = ({ isOpen, onClose, onSave, task }: TaskModalProps) => {
             </div>
           </div>
 
-          <div>
-            <Label htmlFor="tags">Tags</Label>
+          <div className="bg-transparent">
+            <Label htmlFor="tags" className="text-foreground">Tags</Label>
             <Input
               id="tags"
               value={tags}
@@ -117,7 +117,7 @@ const TaskModal = ({ isOpen, onClose, onSave, task }: TaskModalProps) => {
           </div>
         </div>
 
-        <DialogFooter>
+        <DialogFooter className="bg-transparent">
           <Button variant="outline" onClick={handleClose}>
             Cancel
           </Button>

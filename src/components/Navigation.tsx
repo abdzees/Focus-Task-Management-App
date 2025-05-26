@@ -20,12 +20,12 @@ const Navigation = () => {
   return (
     <>
       {/* Desktop Navigation */}
-      <nav className="hidden md:flex fixed top-0 left-0 right-0 z-50 glass-card border-b border-border backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-6 py-4 w-full">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-8">
-              <h1 className="text-2xl font-semibold text-gradient">Focus</h1>
-              <div className="flex space-x-1">
+      <nav className="hidden md:flex fixed top-0 left-0 right-0 z-50 bg-card/90 backdrop-blur-md border-b border-border">
+        <div className="max-w-7xl mx-auto px-6 py-4 w-full bg-transparent">
+          <div className="flex items-center justify-between bg-transparent">
+            <div className="flex items-center space-x-8 bg-transparent">
+              <h1 className="text-2xl font-montserrat font-bold logo-white">Focus</h1>
+              <div className="flex space-x-1 bg-transparent">
                 {navItems.map((item) => {
                   const Icon = item.icon;
                   return (
@@ -50,15 +50,15 @@ const Navigation = () => {
       </nav>
 
       {/* Mobile Navigation */}
-      <nav className="md:hidden fixed top-0 left-0 right-0 z-50 glass-card border-b border-border backdrop-blur-xl">
-        <div className="px-4 py-4">
-          <div className="flex items-center justify-between">
-            <h1 className="text-xl font-semibold text-gradient">Focus</h1>
+      <nav className="md:hidden fixed top-0 left-0 right-0 z-50 bg-card/90 backdrop-blur-md border-b border-border">
+        <div className="px-4 py-4 bg-transparent">
+          <div className="flex items-center justify-between bg-transparent">
+            <h1 className="text-xl font-montserrat font-bold logo-white">Focus</h1>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2"
+              className="p-2 bg-transparent"
             >
               {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
@@ -67,8 +67,8 @@ const Navigation = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="absolute top-full left-0 right-0 glass-card border-t border-border animate-slide-in">
-            <div className="px-4 py-4 space-y-2">
+          <div className="absolute top-full left-0 right-0 bg-card/90 backdrop-blur-md border-t border-border animate-slide-in">
+            <div className="px-4 py-4 space-y-2 bg-transparent">
               {navItems.map((item) => {
                 const Icon = item.icon;
                 return (

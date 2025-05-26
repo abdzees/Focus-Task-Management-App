@@ -82,25 +82,25 @@ const Settings = () => {
 
   return (
     <Layout>
-      <div className="max-w-2xl mx-auto space-y-6 animate-fade-in">
+      <div className="max-w-2xl mx-auto space-y-6 animate-fade-in bg-transparent">
         {/* Header */}
-        <div>
+        <div className="bg-transparent">
           <h1 className="text-2xl md:text-3xl font-bold text-foreground">Settings</h1>
           <p className="text-muted-foreground">Customize your productivity experience</p>
         </div>
 
         {/* Profile Section */}
-        <div className="glass-card rounded-lg p-6 space-y-4">
-          <div className="flex items-center gap-2 mb-4">
+        <div className="bg-card rounded-lg p-6 space-y-4 border border-border">
+          <div className="flex items-center gap-2 mb-4 bg-transparent">
             <User className="w-5 h-5 text-primary" />
             <h2 className="text-lg font-semibold text-foreground">Profile</h2>
           </div>
           
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 bg-transparent">
             <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent-hover rounded-full flex items-center justify-center">
               <span className="text-white font-semibold text-xl">U</span>
             </div>
-            <div>
+            <div className="bg-transparent">
               <h3 className="font-medium text-foreground">Local User</h3>
               <p className="text-sm text-muted-foreground">Data stored locally on this device</p>
             </div>
@@ -108,15 +108,15 @@ const Settings = () => {
         </div>
 
         {/* Appearance Section */}
-        <div className="glass-card rounded-lg p-6 space-y-4">
-          <div className="flex items-center gap-2 mb-4">
+        <div className="bg-card rounded-lg p-6 space-y-4 border border-border">
+          <div className="flex items-center gap-2 mb-4 bg-transparent">
             {settings.darkMode ? <Moon className="w-5 h-5 text-primary" /> : <Sun className="w-5 h-5 text-primary" />}
             <h2 className="text-lg font-semibold text-foreground">Appearance</h2>
           </div>
           
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
+          <div className="space-y-4 bg-transparent">
+            <div className="flex items-center justify-between bg-transparent">
+              <div className="bg-transparent">
                 <label className="text-sm font-medium text-foreground">Dark Mode</label>
                 <p className="text-xs text-muted-foreground">Switch between light and dark themes</p>
               </div>
@@ -129,15 +129,15 @@ const Settings = () => {
         </div>
 
         {/* Productivity Section */}
-        <div className="glass-card rounded-lg p-6 space-y-4">
-          <div className="flex items-center gap-2 mb-4">
+        <div className="bg-card rounded-lg p-6 space-y-4 border border-border">
+          <div className="flex items-center gap-2 mb-4 bg-transparent">
             <RotateCcw className="w-5 h-5 text-primary" />
             <h2 className="text-lg font-semibold text-foreground">Productivity</h2>
           </div>
           
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
+          <div className="space-y-4 bg-transparent">
+            <div className="flex items-center justify-between bg-transparent">
+              <div className="bg-transparent">
                 <label className="text-sm font-medium text-foreground">Week Start</label>
                 <p className="text-xs text-muted-foreground">First day of the week in calendar</p>
               </div>
@@ -158,13 +158,13 @@ const Settings = () => {
         </div>
 
         {/* Data Section */}
-        <div className="glass-card rounded-lg p-6 space-y-4">
-          <div className="flex items-center gap-2 mb-4">
+        <div className="bg-card rounded-lg p-6 space-y-4 border border-border">
+          <div className="flex items-center gap-2 mb-4 bg-transparent">
             <Trash2 className="w-5 h-5 text-primary" />
             <h2 className="text-lg font-semibold text-foreground">Data Management</h2>
           </div>
           
-          <div className="space-y-3">
+          <div className="space-y-3 bg-transparent">
             <Dialog open={isResetDialogOpen} onOpenChange={setIsResetDialogOpen}>
               <DialogTrigger asChild>
                 <Button variant="destructive" className="w-full">
@@ -194,8 +194,8 @@ const Settings = () => {
         </div>
 
         {/* Footer */}
-        <div className="text-center text-sm text-muted-foreground py-4">
-          <p>Focus v1.0.0 • Made with ❤️ for productivity</p>
+        <div className="text-center text-sm text-muted-foreground py-4 bg-transparent">
+          <p>Focus v1.0.0 • Made by Abdullah Zeeshan</p>
         </div>
       </div>
     </Layout>
