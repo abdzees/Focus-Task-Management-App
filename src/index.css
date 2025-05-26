@@ -7,37 +7,37 @@
 
 @layer base {
   :root {
-    /* Light Mode Variables */
-    --bg: 249 250 251;
-    --text-primary: 31 41 55;
-    --text-secondary: 107 114 128;
-    --accent: 37 99 235;
-    --accent-hover: 29 78 216;
-    --success: 16 185 129;
-    --error: 239 68 68;
-    --card-bg: 255 255 255;
-    --border: 229 231 235;
+/* Light Mode Variables */
+  --bg: 245 245 247;                 /* Very light gray, not pure white */
+  --text-primary: 17 24 39;          /* Deep slate (#111827) for sharp contrast */
+  --text-secondary: 100 116 139;     /* Muted slate (#64748B) */
+  --accent: 59 130 246;              /* Blue-500 (#3B82F6) */
+  --accent-hover: 37 99 235;         /* Blue-600 (#2563EB) */
+  --success: 34 197 94;              /* Green-500 (#22C55E) */
+  --error: 239 68 68;                /* Red-500 (#EF4444) */
+  --card-bg: 255 255 255;            /* Pure white cards */
+  --border: 229 231 235;             /* Light gray border (#E5E7EB) */
 
-    /* Existing shadcn variables */
-    --background: var(--bg);
-    --foreground: var(--text-primary);
-    --card: var(--card-bg);
-    --card-foreground: var(--text-primary);
-    --popover: var(--card-bg);
-    --popover-foreground: var(--text-primary);
-    --primary: var(--accent);
-    --primary-foreground: 255 255 255;
-    --secondary: 241 245 249;
-    --secondary-foreground: var(--text-primary);
-    --muted: 248 250 252;
-    --muted-foreground: var(--text-secondary);
-    --accent-color: var(--accent);
-    --accent-foreground: 255 255 255;
-    --destructive: var(--error);
-    --destructive-foreground: 255 255 255;
-    --input: var(--border);
-    --ring: var(--accent);
-    --radius: 0.75rem;
+  /* ShadCN-compatible variables */
+  --background: var(--bg);
+  --foreground: var(--text-primary);
+  --card: var(--card-bg);
+  --card-foreground: var(--text-primary);
+  --popover: var(--card-bg);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--accent);
+  --primary-foreground: 255 255 255;
+  --secondary: 243 244 246;          /* Neutral light gray (#F3F4F6) */
+  --secondary-foreground: var(--text-primary);
+  --muted: 248 250 252;
+  --muted-foreground: var(--text-secondary);
+  --accent-color: var(--accent);
+  --accent-foreground: 255 255 255;
+  --destructive: var(--error);
+  --destructive-foreground: 255 255 255;
+  --input: var(--border);
+  --ring: var(--accent);
+  --radius: 0.75rem;
   }
 
   .dark {
