@@ -148,7 +148,7 @@ const Settings = () => {
         </div>
 
         {/* Footer */}
-        <div className="text-center text-sm text-[button-bg] py-4 bg-transparent">
+        <div className="text-center text-sm text-button-bg py-4 bg-transparent">
           <p>Focus v1.0.0 • Made by Abdullah Zeeshan</p>
         </div>
       </div>
