@@ -8,7 +8,7 @@
 @layer base {
   :root {
 /* Light Mode Variables */
-  --bg: 2 245 247;                 /* Very light gray, not pure white */
+  --bg: 245 245 247;                 /* Very light gray, not pure white */
   --text-primary: 17 24 39;          /* Deep slate (#111827) for sharp contrast */
   --text-secondary: 100 116 139;     /* Muted slate (#64748B) */
   --accent: 59 130 246;              /* Blue-500 (#3B82F6) */
