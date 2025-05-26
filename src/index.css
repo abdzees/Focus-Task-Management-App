@@ -42,35 +42,35 @@
 
   .dark {
     /* Dark Mode Variables */
-    --bg: 17 24 39;
-    --text-primary: 249 250 251;
-    --text-secondary: 156 163 175;
-    --accent: 59 130 246;
-    --accent-hover: 37 99 235;
-    --success: 52 211 153;
-    --error: 248 113 113;
-    --card-bg: 31 41 55;
-    --border: 55 65 81;
+    --bg: 17 24 39;                    /* Dark slate background */
+  --text-primary: 243 244 246;       /* Light gray text (#F3F4F6) */
+  --text-secondary: 156 163 175;     /* Mid gray (#9CA3AF) */
+  --accent: 147 197 253;             /* Light blue (#93C5FD) */
+  --accent-hover: 96 165 250;        /* Blue-400 (#60A5FA) */
+  --success: 74 222 128;             /* Green-400 (#4ADE80) */
+  --error: 248 113 113;              /* Red-400 (#F87171) */
+  --card-bg: 30 41 59;               /* Deep card background (#1E293B) */
+  --border: 51 65 85;                /* Darker border (#334155) */
 
-    /* Existing shadcn variables updated for dark mode */
-    --background: var(--bg);
-    --foreground: var(--text-primary);
-    --card: var(--card-bg);
-    --card-foreground: var(--text-primary);
-    --popover: var(--card-bg);
-    --popover-foreground: var(--text-primary);
-    --primary: var(--accent);
-    --primary-foreground: 17 24 39;
-    --secondary: 55 65 81;
-    --secondary-foreground: var(--text-primary);
-    --muted: 55 65 81;
-    --muted-foreground: var(--text-secondary);
-    --accent-color: var(--accent);
-    --accent-foreground: 17 24 39;
-    --destructive: var(--error);
-    --destructive-foreground: var(--text-primary);
-    --input: var(--border);
-    --ring: var(--accent);
+  --background: var(--bg);
+  --foreground: var(--text-primary);
+  --card: var(--card-bg);
+  --card-foreground: var(--text-primary);
+  --popover: var(--card-bg);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--accent);
+  --primary-foreground: 17 24 39;
+  --secondary: 38 50 72;
+  --secondary-foreground: var(--text-primary);
+  --muted: 55 65 81;
+  --muted-foreground: var(--text-secondary);
+  --accent-color: var(--accent);
+  --accent-foreground: 17 24 39;
+  --destructive: var(--error);
+  --destructive-foreground: 17 24 39;
+  --input: var(--border);
+  --ring: var(--accent);
+  --radius: 0.75rem;
   }
 }
 
