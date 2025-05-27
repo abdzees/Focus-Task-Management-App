@@ -132,7 +132,7 @@ const Tasks = () => {
         <div className="glass-card rounded-lg p-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="relative">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
+              <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground card-bg" />
               <Input
                 placeholder="Search tasks..."
                 value={searchTerm}

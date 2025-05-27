@@ -90,15 +90,15 @@ const Dashboard = () => {
         </div>
 
         {/* Enhanced Stats Overview with improved spacing */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 mb-12 py-6">
           <div className="dashboard-card text-center">
-            <CheckCircle className="w-10 h-10 text-success-green mx-auto mb-4" />
+            <CheckCircle className="w-10 h-10 text-coral-accent mx-auto mb-4" />
             <div className="text-3xl font-bold text-foreground mb-2">{completedToday}/{totalTasks}</div>
             <div className="text-sm text-muted-foreground">Tasks completed today</div>
           </div>
           
           <div className="dashboard-card text-center">
-            <Clock className="w-10 h-10 text-primary mx-auto mb-4" />
+            <Clock className="w-10 h-10 text-coral-accent mx-auto mb-4" />
             <div className="text-3xl font-bold text-foreground mb-2">{activeTasks.length}</div>
             <div className="text-sm text-muted-foreground">Active tasks</div>
           </div>
