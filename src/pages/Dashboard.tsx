@@ -144,7 +144,7 @@ const Dashboard = () => {
 
           {/* Upcoming Events */}
           <div className="space-y-4">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between w-4 h-4">
             <h2 className="text-xl font-semibold text-foreground">Upcoming Events</h2>
             </div>
             <div className="glass-card rounded-lg p-4 space-y-3">
