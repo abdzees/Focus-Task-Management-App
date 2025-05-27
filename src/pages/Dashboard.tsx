@@ -144,7 +144,9 @@ const Dashboard = () => {
 
           {/* Upcoming Events */}
           <div className="space-y-4">
+            <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold text-foreground">Upcoming Events</h2>
+            </div>
             <div className="glass-card rounded-lg p-4 space-y-3">
               {upcomingEvents.length > 0 ? (
                 upcomingEvents.map((event) => (
