@@ -86,7 +86,7 @@
   
   .btn-custom {
     background-color: rgb(var(--btn-bg));
-    color: #2e2e2e;
+    color: rgb(var(--btn-text));
     transition: all 0.2s ease-out;
   }
   
