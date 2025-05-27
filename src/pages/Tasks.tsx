@@ -234,7 +234,7 @@ const Tasks = () => {
           {filteredTasks.length === 0 && (
             <div className="glass-card rounded-lg p-12 text-center">
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Plus className="w-8 h-8 text-primary" />
+                <Plus className="w-8 h-8 text-coral-accent" />
               </div>
               <h3 className="text-lg font-semibold text-foreground mb-2">No tasks found</h3>
               <p className="text-muted-foreground mb-4">
