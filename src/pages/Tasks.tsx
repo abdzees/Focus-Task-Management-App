@@ -97,7 +97,7 @@ const Tasks = () => {
             <h1 className="text-2xl md:text-3xl font-bold text-foreground">Tasks</h1>
             <p className="text-muted-foreground">Organize and track your daily activities</p>
           </div>
-          <Button onClick={() => setIsTaskModalOpen(true)} className="gap-2 text-white border border-transparent hover:border-[#ebe8d9] transition-colors duration-200 bg-zinc-300 hover:bg-zinc-200">
+          <Button onClick={() => setIsTaskModalOpen(true)} className="gap-2 bg-[#fc812a] text-white border border-transparent hover:bg-black hover:border-[#ebe8d9] transition-colors duration-200">
             <Plus className="w-4 h-4" />
             New Task
           </Button>
