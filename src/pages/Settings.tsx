@@ -125,7 +125,7 @@ const Settings = () => {
                   Reset App
                 </Button>
               </DialogTrigger>
-              <DialogContent>
+              <DialogContent className="space-y-3 bg-transparent" >
                 <DialogHeader>
                   <DialogTitle>Reset Application</DialogTitle>
                   <DialogDescription>
