@@ -59,7 +59,7 @@
   }
 
   body {
-    background-color: rgb(var(--background));
+    background-color: (var(--background));
     color: #2e2e2e;
     font-family: 'Inter', sans-serif;
   }
@@ -142,7 +142,7 @@
   }
 
   .dashboard-card {
-    background-color: rgb(var(--card-bg));
+    background-color: (var(--card-bg));
     border: 1px solid #e5e7eb;
     padding: 2rem;
     border-radius: 0.75rem;
