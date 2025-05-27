@@ -120,7 +120,7 @@ const Calendar = () => {
             <p className=" text-[#6b7280]">Manage your schedule and important dates</p>
           </div>
           <Button onClick={handleCreateEvent} className="gap-2">
-            <Plus className="w-4 h-4 icon-primary" />
+            <Plus className="w-4 h-4" />
             New Event
           </Button>
         </div>
