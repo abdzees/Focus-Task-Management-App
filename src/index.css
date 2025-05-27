@@ -17,7 +17,7 @@
     --icon-color: 250 129 46;      /* #fa812e */
     
     /* Button Variables */
-    --btn-bg: 254 251 234;         /* #fefbea */
+    --btn-bg: 250, 129, 46;         /* #fefbea */
     --btn-hover: 250 129 46;       /* #fa812e */
     --btn-text-hover: 255 255 255; /* #ffffff */
     
