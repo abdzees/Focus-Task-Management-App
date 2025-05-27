@@ -115,7 +115,7 @@ const Settings = () => {
                   Reset App
                 </Button>
               </DialogTrigger>
-              <DialogContent className="bg-[#fefbea]">
+              <DialogContent className="bg-white">
                 <DialogHeader>
                   <DialogTitle>Reset Application</DialogTitle>
                   <DialogDescription>
