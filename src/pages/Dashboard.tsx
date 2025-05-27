@@ -148,7 +148,7 @@ const Dashboard = () => {
             <div className="glass-card rounded-lg p-4 space-y-3">
               {upcomingEvents.length > 0 ? (
                 upcomingEvents.map((event) => (
-                  <div key={event.id} className="flex items-center justify-between p-3 rounded-md hover:bg-background/50 transition-colors">
+                  <div key={event.id} className="flex items-center justify-between p-3 rounded-mdS">
                     <div className="flex items-center gap-3">
                       <div className={`w-3 h-3 rounded-full ${
                         event.type === 'exam' ? 'bg-red-500' :
