@@ -59,7 +59,7 @@
   }
 
   body {
-    background-color: (var(--background));
+    background-color: rgb(var(--background));
     color: #2e2e2e;
     font-family: 'Inter', sans-serif;
   }
@@ -70,6 +70,10 @@
     background-color: rgb(var(--card-bg));
     color: #2e2e2e;
     border: 1px solid #e5e7eb;
+  }
+
+  .bg-background{
+    background-color: var(--background);
   }
   
   .glass-card {
@@ -142,7 +146,7 @@
   }
 
   .dashboard-card {
-    background-color: (var(--card-bg));
+    background-color: rgb(var(--card-bg));
     border: 1px solid #e5e7eb;
     padding: 2rem;
     border-radius: 0.75rem;
