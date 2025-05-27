@@ -135,7 +135,7 @@ const Calendar = () => {
               <Button variant="outline" size="sm" onClick={() => navigateMonth('prev')} className="p-2 border-transparent">
                 <ChevronLeft className="w-4 h-4 icon-primary" />
               </Button>
-              <Button variant="outline" size="sm" onClick={() => setCurrentDate(new Date())} className="bg-[#fa812e] text-white ">
+              <Button variant="outline" size="sm" onClick={() => setCurrentDate(new Date())} className="bg-[#fa812e] text-white border-[ebe8d9]">
                 Today
               </Button>
               <Button variant="outline" size="sm" onClick={() => navigateMonth('next')} className="p-2 border-transparent">
