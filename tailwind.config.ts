@@ -30,7 +30,7 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
-					DEFAULT: 'hsl(var(--primary))',
+					DEFAULT: 'rgb(var(--btn-bg))',
 					foreground: 'hsl(var(--primary-foreground))'
 				},
 				secondary: {
@@ -47,15 +47,14 @@ export default {
 				},
 				accent: {
 					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))',
-					hover: 'hsl(var(--accent-hover))'
+					foreground: 'hsl(var(--accent-foreground))'
 				},
 				popover: {
-					DEFAULT: 'hsl(var(--popover))',
+					DEFAULT: 'rgb(var(--card-bg))',
 					foreground: 'hsl(var(--popover-foreground))'
 				},
 				card: {
-					DEFAULT: 'hsl(var(--card))',
+					DEFAULT: 'rgb(var(--card-bg))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				sidebar: {
@@ -67,12 +66,7 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				},
-				'calm-blue': 'hsl(var(--calm-blue))',
-				'soft-lavender': 'hsl(var(--soft-lavender))',
-				'coral-accent': 'hsl(var(--coral-accent))',
-				'success-green': 'hsl(var(--success-green))',
-				'gentle-gray': 'hsl(var(--gentle-gray))',
+				}
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

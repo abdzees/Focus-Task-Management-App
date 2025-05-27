@@ -8,9 +8,16 @@
 
 @layer base {
   :root {
+    /* Button Variables */
+    --btn-bg: 254 251 234;         /* #fefbea */
+    --btn-hover: 250 129 46;       /* #fa812e */
+    --btn-text-hover: 255 255 255; /* #ffffff */
+    
+    /* Card Variables */
+    --card-bg: 254 251 234; /* #fefbea */
+    
     /* Unified Color Palette */
     --background: #ffffff;
-    --card-bg: #fffbea;
     --text-primary: #2e2e2e;
     --text-secondary: #6b7280;
     --button-bg: #f97316;
@@ -20,12 +27,12 @@
     
     /* ShadCN-compatible variables */
     --foreground: #2e2e2e;
-    --card: #fffbea;
+    --card: 254 251 234;
     --card-foreground: #2e2e2e;
-    --popover: #fffbea;
+    --popover: 254 251 234;
     --popover-foreground: #2e2e2e;
-    --primary: #f97316;
-    --primary-foreground: #ffffff;
+    --primary: 254 251 234;
+    --primary-foreground: #2e2e2e;
     --secondary: #f3f4f6;
     --secondary-foreground: #2e2e2e;
     --muted: #f9fafb;
@@ -54,9 +61,20 @@
 
 @layer utilities {
   .card-bg {
-    background-color: #fffbea;
+    background-color: rgb(var(--card-bg));
     color: #2e2e2e;
     border: 1px solid #e5e7eb;
+  }
+  
+  .btn-custom {
+    background-color: rgb(var(--btn-bg));
+    color: #2e2e2e;
+    transition: all 0.2s ease-out;
+  }
+  
+  .btn-custom:hover {
+    background-color: rgb(var(--btn-hover));
+    color: rgb(var(--btn-text-hover));
   }
   
   .hover-lift {

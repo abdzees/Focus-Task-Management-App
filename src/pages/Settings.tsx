@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
@@ -65,7 +64,7 @@ const Settings = () => {
         </div>
 
         {/* Profile Section */}
-        <div className="bg-[#fffbea] rounded-lg p-6 space-y-4 border border-[#e5e7eb]">
+        <div className="card-bg rounded-lg p-6 space-y-4 border border-[#e5e7eb]">
           <div className="flex items-center gap-2 mb-4 bg-transparent">
             <User className="w-5 h-5 text-[#f97316]" />
             <h2 className="text-lg font-semibold text-[#2e2e2e]">Profile</h2>
@@ -83,7 +82,7 @@ const Settings = () => {
         </div>
 
         {/* Productivity Section */}
-        <div className="bg-[#fffbea] rounded-lg p-6 space-y-4 border border-[#e5e7eb]">
+        <div className="card-bg rounded-lg p-6 space-y-4 border border-[#e5e7eb]">
           <div className="flex items-center gap-2 mb-4 bg-transparent">
             <RotateCcw className="w-5 h-5 text-[#f97316]" />
             <h2 className="text-lg font-semibold text-[#2e2e2e]">Productivity</h2>
@@ -112,7 +111,7 @@ const Settings = () => {
         </div>
 
         {/* Data Section */}
-        <div className="bg-[#fffbea] rounded-lg p-6 space-y-4 border border-[#e5e7eb]">
+        <div className="card-bg rounded-lg p-6 space-y-4 border border-[#e5e7eb]">
           <div className="flex items-center gap-2 mb-4 bg-transparent">
             <Trash2 className="w-5 h-5 text-[#f97316]" />
             <h2 className="text-lg font-semibold text-[#2e2e2e]">Data Management</h2>
@@ -148,7 +147,7 @@ const Settings = () => {
         </div>
 
         {/* Footer */}
-        <div className="text-center text-sm text-button-bg py-4 bg-transparent">
+        <div className="text-center text-sm text-[#6b7280] py-4 bg-transparent">
           <p>Focus v1.0.0 • Made by Abdullah Zeeshan</p>
         </div>
       </div>
