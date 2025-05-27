@@ -146,7 +146,7 @@ const Dashboard = () => {
           <div className="space-y-4">
             <div className="flex items-center justify-between ">
               <h2 className="text-xl font-semibold text-foreground">Upcoming Events</h2>
-              <Button size="sm" className="gap-2" onClick={() => handleCreateEvent()}>
+              <Button size="sm" className="gap-2" onClick={() => setIsEventModalOpen(true)}>
                 <Plus className="w-4 h-4" />
                 Add Event
               </Button>
