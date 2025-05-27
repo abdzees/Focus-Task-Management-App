@@ -110,7 +110,7 @@ const Settings = () => {
           <div className="space-y-3 bg-transparent">
             <Dialog open={isResetDialogOpen} onOpenChange={setIsResetDialogOpen}>
               <DialogTrigger asChild>
-                <Button variant="destructive" className="w-full bg-[#fa812e] text-white hover:bg-[#fefbea] hover:text-black hover:border hover:border-black border-transparent">
+                <Button variant="destructive" className="w-full bg-[#fa812e] text-white hover:bg-[#fefbea] hover:text-black hover:border hover:border-[#eae8e1] border-transparent">
                   <Trash2 className="w-4 h-4 mr-2" />
                   Reset App
                 </Button>
