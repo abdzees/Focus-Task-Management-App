@@ -67,7 +67,7 @@ const Dashboard = () => {
           <h1 className="text-3xl md:text-4xl font-bold text-gradient">
             Good {new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 17 ? 'afternoon' : 'evening'}!
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-[#6b7280]">
             Let's make today productive and meaningful
           </p>
         </div>
@@ -77,19 +77,19 @@ const Dashboard = () => {
           <div className="dashboard-card text-center">
             <CheckCircle className="w-10 h-10 text-coral-accent mx-auto mb-4" />
             <div className="text-3xl font-bold text-foreground mb-2">{completedToday}/{totalTasks}</div>
-            <div className="text-sm text-muted-foreground">Tasks completed today</div>
+            <div className="text-sm text-[#6b7280]">Tasks completed today</div>
           </div>
           
           <div className="dashboard-card text-center">
             <Clock className="w-10 h-10 text-coral-accent mx-auto mb-4" />
             <div className="text-3xl font-bold text-foreground mb-2">{activeTasks.length}</div>
-            <div className="text-sm text-muted-foreground">Active tasks</div>
+            <div className="text-sm text-[#6b7280]">Active tasks</div>
           </div>
           
           <div className="dashboard-card text-center">
             <CalendarIcon className="w-10 h-10 text-coral-accent mx-auto mb-4" />
             <div className="text-3xl font-bold text-foreground mb-2">{upcomingEvents.length}</div>
-            <div className="text-sm text-muted-foreground">Upcoming events</div>
+            <div className="text-sm text-[#6b7280]">Upcoming events</div>
           </div>
         </div>
 
@@ -108,7 +108,7 @@ const Dashboard = () => {
               {activeTasks.slice(0, 4).map(task => <TaskCard key={task.id} task={task} onToggle={toggleTask} />)}
               
               {activeTasks.length === 0 && <div className="glass-card rounded-lg p-8 text-center">
-                  <p className="text-muted-foreground">No tasks for today. Add one to get started!</p>
+                  <p className="text-[#6b7280]">No tasks for today. Add one to get started!</p>
                   <Button onClick={() => setIsTaskModalOpen(true)} className="mt-4 bg-[#fc812a] text-white border border-transparent ">
                     <Plus className="w-4 h-4 mr-2" />
                     Create Your First Task
@@ -136,7 +136,7 @@ const Dashboard = () => {
                     </div>
                     <span className="text-xs text-muted-foreground">{formatEventDate(event.date)}</span>
                   </div>) : <div className="text-center py-8">
-                  <p className="text-muted-foreground">No upcoming events</p>
+                  <p className="text-[#6b7280]">No upcoming events</p>
                 </div>}
             </div>
           </div>
