@@ -89,28 +89,28 @@ const Dashboard = () => {
           </p>
         </div>
 
-        {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="glass-card rounded-lg p-6 text-center">
-            <CheckCircle className="w-8 h-8 text-success-green mx-auto mb-2" />
-            <div className="text-2xl font-bold text-foreground">{completedToday}/{totalTasks}</div>
+        {/* Enhanced Stats Overview with improved spacing */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 mb-8">
+          <div className="dashboard-card text-center">
+            <CheckCircle className="w-10 h-10 text-success-green mx-auto mb-4" />
+            <div className="text-3xl font-bold text-foreground mb-2">{completedToday}/{totalTasks}</div>
             <div className="text-sm text-muted-foreground">Tasks completed today</div>
           </div>
           
-          <div className="glass-card rounded-lg p-6 text-center">
-            <Clock className="w-8 h-8 text-primary mx-auto mb-2" />
-            <div className="text-2xl font-bold text-foreground">{activeTasks.length}</div>
+          <div className="dashboard-card text-center">
+            <Clock className="w-10 h-10 text-primary mx-auto mb-4" />
+            <div className="text-3xl font-bold text-foreground mb-2">{activeTasks.length}</div>
             <div className="text-sm text-muted-foreground">Active tasks</div>
           </div>
           
-          <div className="glass-card rounded-lg p-6 text-center">
-            <CalendarIcon className="w-8 h-8 text-coral-accent mx-auto mb-2" />
-            <div className="text-2xl font-bold text-foreground">{upcomingEvents.length}</div>
+          <div className="dashboard-card text-center">
+            <CalendarIcon className="w-10 h-10 text-coral-accent mx-auto mb-4" />
+            <div className="text-3xl font-bold text-foreground mb-2">{upcomingEvents.length}</div>
             <div className="text-sm text-muted-foreground">Upcoming events</div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
           {/* Today's Tasks */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">

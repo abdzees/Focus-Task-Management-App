@@ -46,6 +46,10 @@
     --input: #e5e7eb;
     --ring: #f97316;
     --radius: 0.75rem;
+
+    /* Success color for completed tasks */
+    --success-green: #10b981;
+    --coral-accent: #f97316;
   }
 }
 
@@ -127,5 +131,27 @@
     background-color: rgb(var(--primary));
     color: white;
     font-weight: bold;
+  }
+
+  .text-success-green {
+    color: var(--success-green);
+  }
+
+  .text-coral-accent {
+    color: var(--coral-accent);
+  }
+
+  .dashboard-card {
+    background-color: rgb(var(--card-bg));
+    border: 1px solid #e5e7eb;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease-out;
+  }
+
+  .dashboard-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
 }
