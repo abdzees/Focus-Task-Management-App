@@ -88,7 +88,7 @@ const Settings = () => {
                 <p className="text-xs text-[#6b7280]">First day of the week in calendar</p>
               </div>
               <Select value={settings.weekStart} onValueChange={(value: 'sunday' | 'monday') => updateSetting('weekStart', value)}>
-                <SelectTrigger className="w-32">
+                <SelectTrigger className="w-32 border-[#eae8e1]">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
