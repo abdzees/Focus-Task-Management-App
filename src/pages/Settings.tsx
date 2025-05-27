@@ -127,7 +127,7 @@ const Settings = () => {
                   <Button variant="outline" onClick={() => setIsResetDialogOpen(false)}>
                     Cancel
                   </Button>
-                  <Button variant="destructive" onClick={handleResetApp} className="bg-[#fa812e] text-white hover:bg-[#fefbea] hover:text-black">
+                  <Button variant="destructive" onClick={handleResetApp} className="bg-[#fa812e] text-white hover:bg-[#fefbea] hover:text-black border border-black">
                     Reset Everything
                   </Button>
                 </DialogFooter>
