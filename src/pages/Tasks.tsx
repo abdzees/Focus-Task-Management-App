@@ -143,7 +143,7 @@ const Tasks = () => {
             
             <Select value={filterStatus} onValueChange={(value: any) => setFilterStatus(value)}>
               <SelectTrigger className="border-[#eae8e1]">
-                {/* <Filter className="w-4 h-4 mr-2" /> */}
+                <Filter className="w-4 h-4 mr-2" />
                 <SelectValue placeholder="Filter by status" />
               </SelectTrigger>
               <SelectContent>
@@ -155,6 +155,7 @@ const Tasks = () => {
 
             <Select value={filterPriority} onValueChange={(value: any) => setFilterPriority(value)}>
               <SelectTrigger className="border-[#eae8e1]">
+                <Filter className="w-4 h-4 mr-2" />
                 <SelectValue placeholder="Filter by priority" />
               </SelectTrigger>
               <SelectContent>
