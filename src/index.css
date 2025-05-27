@@ -8,16 +8,20 @@
 
 @layer base {
   :root {
+    /* Centralized Color Management */
+    --primary: 250 129 46;         /* #fa812e */
+    --card-bg: 254 251 234;        /* #fefbea */
+    --alert-bg: 254 251 234;       /* #fefbea */
+    --text-dark: 31 41 55;         /* #1f2937 */
+    --background: 255 255 255;     /* #ffffff */
+    --icon-color: 250 129 46;      /* #fa812e */
+    
     /* Button Variables */
     --btn-bg: 254 251 234;         /* #fefbea */
     --btn-hover: 250 129 46;       /* #fa812e */
     --btn-text-hover: 255 255 255; /* #ffffff */
     
-    /* Card Variables */
-    --card-bg: 254 251 234; /* #fefbea */
-    
     /* Unified Color Palette */
-    --background: #ffffff;
     --text-primary: #2e2e2e;
     --text-secondary: #6b7280;
     --button-bg: #f97316;
@@ -31,8 +35,6 @@
     --card-foreground: #2e2e2e;
     --popover: 254 251 234;
     --popover-foreground: #2e2e2e;
-    --primary: 254 251 234;
-    --primary-foreground: #2e2e2e;
     --secondary: #f3f4f6;
     --secondary-foreground: #2e2e2e;
     --muted: #f9fafb;
@@ -53,7 +55,7 @@
   }
 
   body {
-    background-color: #ffffff;
+    background-color: rgb(var(--background));
     color: #2e2e2e;
     font-family: 'Inter', sans-serif;
   }
@@ -64,6 +66,13 @@
     background-color: rgb(var(--card-bg));
     color: #2e2e2e;
     border: 1px solid #e5e7eb;
+  }
+  
+  .glass-card {
+    background-color: rgb(var(--card-bg)) !important;
+    backdrop-filter: none !important;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
   
   .btn-custom {
@@ -97,5 +106,26 @@
     color: #ffffff !important;
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
+  }
+  
+  .alert-solid {
+    background-color: rgb(var(--alert-bg)) !important;
+    backdrop-filter: none !important;
+    border: 1px solid #e5e7eb;
+  }
+  
+  .mobile-nav-solid {
+    background-color: rgb(var(--background)) !important;
+    backdrop-filter: none !important;
+  }
+  
+  .icon-primary {
+    color: rgb(var(--icon-color));
+  }
+  
+  .today-highlight {
+    background-color: rgb(var(--primary));
+    color: white;
+    font-weight: bold;
   }
 }

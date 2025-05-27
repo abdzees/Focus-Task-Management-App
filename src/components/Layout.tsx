@@ -11,7 +11,7 @@ const Layout = ({ children }: LayoutProps) => {
     <div className="min-h-screen bg-white">
       <Navigation />
       <main className="pt-20 md:pt-24 px-4 md:px-6 pb-8 bg-white">
-        <div className="max-w-7xl mx-auto bg-transparent">
+        <div className="max-w-7xl mx-auto bg-white">
           {children}
         </div>
       </main>
