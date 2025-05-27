@@ -137,12 +137,12 @@ const Tasks = () => {
                 placeholder="Search tasks..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
+                className="pl-10 border-[#eae8e1]"
               />
             </div>
             
             <Select value={filterStatus} onValueChange={(value: any) => setFilterStatus(value)}>
-              <SelectTrigger>
+              <SelectTrigger className="border-[#eae8e1]">
                 <Filter className="w-4 h-4 mr-2" />
                 <SelectValue placeholder="Filter by status" />
               </SelectTrigger>
@@ -154,7 +154,7 @@ const Tasks = () => {
             </Select>
 
             <Select value={filterPriority} onValueChange={(value: any) => setFilterPriority(value)}>
-              <SelectTrigger>
+              <SelectTrigger className="border-[#eae8e1]">
                 <SelectValue placeholder="Filter by priority" />
               </SelectTrigger>
               <SelectContent>
