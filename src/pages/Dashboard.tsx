@@ -109,7 +109,7 @@ const Dashboard = () => {
               
               {activeTasks.length === 0 && <div className="glass-card rounded-lg p-8 text-center">
                   <p className="text-muted-foreground">No tasks for today. Add one to get started!</p>
-                  <Button onClick={() => setIsTaskModalOpen(true)} className="bg-[#fc812a] text-white border border-transparent hover:bg-transparent hover:text-[#fc812a] hover:border-[#ebe8d9] transition-colors duration-200">
+                  <Button className="mt-4" onClick={() => setIsTaskModalOpen(true)}>
                     <Plus className="w-4 h-4 mr-2" />
                     Create Your First Task
                   </Button>
