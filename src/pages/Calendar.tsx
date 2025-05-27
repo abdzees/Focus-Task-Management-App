@@ -117,7 +117,7 @@ const Calendar = () => {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white">
           <div className="bg-white">
             <h1 className="text-2xl md:text-3xl font-bold text-foreground">Calendar</h1>
-            <p className="text-muted-foreground">Manage your schedule and important dates</p>
+            <p className=" text-[#6b7280]">Manage your schedule and important dates</p>
           </div>
           <Button onClick={handleCreateEvent} className="gap-2">
             <Plus className="w-4 h-4 icon-primary" />
@@ -224,7 +224,7 @@ const Calendar = () => {
                   <div className={`w-4 h-4 rounded border ${getEventTypeColor(item.type)}`}></div>
                   <div className="bg-transparent">
                     <div className="text-sm font-medium text-foreground">{item.label}</div>
-                    <div className="text-xs text-muted-foreground">{item.description}</div>
+                    <div className="text-xs  text-[#6b7280]">{item.description}</div>
                   </div>
                 </div>)}
             </div>
