@@ -6,7 +6,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { User, Trash2, RotateCcw } from 'lucide-react';
 import { loadSettings, saveSettings, resetAllData, AppSettings } from '@/utils/localStorage';
 import { toast } from '@/hooks/use-toast';
-
 const Settings = () => {
   const [settings, setSettings] = useState<AppSettings>({
     darkMode: false,
@@ -14,48 +13,42 @@ const Settings = () => {
     weekStart: 'monday'
   });
   const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
-
   useEffect(() => {
     const savedSettings = loadSettings();
     setSettings(savedSettings);
   }, []);
-
   const updateSetting = (key: keyof AppSettings, value: any) => {
-    const newSettings = { ...settings, [key]: value };
+    const newSettings = {
+      ...settings,
+      [key]: value
+    };
     setSettings(newSettings);
     saveSettings(newSettings);
-
     if (key === 'weekStart') {
       toast({
         title: `Week starts on ${value === 'sunday' ? 'Sunday' : 'Monday'}`,
-        description: "Calendar view will update accordingly",
+        description: "Calendar view will update accordingly"
       });
     }
   };
-
   const handleResetApp = () => {
     resetAllData();
     setIsResetDialogOpen(false);
-    
     const defaultSettings: AppSettings = {
       darkMode: false,
       defaultView: 'dashboard',
       weekStart: 'monday'
     };
     setSettings(defaultSettings);
-    
     toast({
       title: "App reset successfully",
-      description: "All data has been cleared",
+      description: "All data has been cleared"
     });
-    
     setTimeout(() => {
       window.location.reload();
     }, 1000);
   };
-
-  return (
-    <Layout>
+  return <Layout>
       <div className="max-w-2xl mx-auto space-y-6 bg-transparent">
         {/* Header */}
         <div className="bg-transparent">
@@ -94,10 +87,7 @@ const Settings = () => {
                 <label className="text-sm font-medium text-[#2e2e2e]">Week Start</label>
                 <p className="text-xs text-[#6b7280]">First day of the week in calendar</p>
               </div>
-              <Select 
-                value={settings.weekStart} 
-                onValueChange={(value: 'sunday' | 'monday') => updateSetting('weekStart', value)}
-              >
+              <Select value={settings.weekStart} onValueChange={(value: 'sunday' | 'monday') => updateSetting('weekStart', value)}>
                 <SelectTrigger className="w-32">
                   <SelectValue />
                 </SelectTrigger>
@@ -125,7 +115,7 @@ const Settings = () => {
                   Reset App
                 </Button>
               </DialogTrigger>
-              <DialogContent>
+              <DialogContent className="bg-[#fefbea]">
                 <DialogHeader>
                   <DialogTitle>Reset Application</DialogTitle>
                   <DialogDescription>
@@ -151,8 +141,6 @@ const Settings = () => {
           <p>Focus v1.0.0 • Made by Abdullah Zeeshan</p>
         </div>
       </div>
-    </Layout>
-  );
+    </Layout>;
 };
-
 export default Settings;
