@@ -95,7 +95,7 @@ const Tasks = () => {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl md:text-3xl font-bold text-foreground">Tasks</h1>
-            <p className="text-muted-foreground">Organize and track your daily activities</p>
+            <p className=" text-[#6b7280]">Organize and track your daily activities</p>
           </div>
           <Button onClick={() => setIsTaskModalOpen(true)} className="gap-2 ">
             <Plus className="w-4 h-4" />
@@ -180,7 +180,7 @@ const Tasks = () => {
                 <Plus className="w-8 h-8 text-coral-accent" />
               </div>
               <h3 className="text-lg font-semibold text-foreground mb-2">No tasks found</h3>
-              <p className="text-muted-foreground mb-4">
+              <p className="mb-4  text-[#6b7280]">
                 {searchTerm || filterStatus !== 'all' || filterPriority !== 'all' ? 'Try adjusting your filters or search term' : 'Create your first task to get started'}
               </p>
               <Button onClick={() => setIsTaskModalOpen(true)}>
